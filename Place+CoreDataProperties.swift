@@ -2,13 +2,13 @@
 //  Place+CoreDataProperties.swift
 //  StreetArtExplorer
 //
-//  Created by student on 27/05/2025.
+//  Created by student on 03/06/2025.
 //
 //
 
 import Foundation
 import CoreData
-
+import PhotosUI
 
 extension Place {
 
@@ -20,6 +20,9 @@ extension Place {
     @NSManaged public var latitude: Double
     @NSManaged public var longitude: Double
     @NSManaged public var name: String?
+    @NSManaged public var imageFilename: String?
+    @NSManaged public var desc: String?
+    @NSManaged public var category: String?
     @NSManaged public var author: User?
     @NSManaged public var favorites: NSSet?
 
@@ -43,5 +46,20 @@ extension Place {
 }
 
 extension Place : Identifiable {
-
+    func loadImageFromDocuments() -> UIImage? {
+        guard let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            return nil
+        }
+        
+        if let filename = self.imageFilename {
+            let fileURL = documentsURL.appendingPathComponent(filename)
+            guard let data = try? Data(contentsOf: fileURL) else {
+                return nil
+            }
+            
+            return UIImage(data: data)
+        } else {
+            return nil
+        }
+    }
 }

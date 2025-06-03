@@ -29,6 +29,7 @@ struct PersistenceController {
             place.latitude = 69
             place.longitude = 42
             place.creationDate = Date()
+            place.imageFilename = "invalid.jpg"
         }
         
         do {
