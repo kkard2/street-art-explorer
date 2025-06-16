@@ -80,15 +80,17 @@ struct AddPlaceView: View {
                 if
                     let data = selectedImageData,
                     let uiImage = UIImage(data: data),
-                    let filename = saveImageToDocuments(image: uiImage) {
+                    let filename = saveImageToDocuments(image: uiImage),
+                    let coord = selectedCoordinate
+                {
                     let place = Place(context: viewContext)
                     place.author = user
                     place.name = name
                     place.desc = description
                     place.category = category
                     place.imageFilename = filename
-                    place.latitude = 0 // TODO: START HERE
-                    place.longitude = 0 // TODO: START HERE
+                    place.latitude = coord.latitude
+                    place.longitude = coord.longitude
                     place.creationDate = Date()
                     do {
                         try viewContext.save()
@@ -99,7 +101,7 @@ struct AddPlaceView: View {
                     showingAlert = true
                 }
             }
-            .disabled(name == "" || description == "" || selectedImageData == nil)
+            .disabled(name == "" || description == "" || selectedImageData == nil || selectedCoordinate == nil)
             .alert("Error when saving", isPresented: $showingAlert) {
                 Button("OK", role: .cancel) {}
             }

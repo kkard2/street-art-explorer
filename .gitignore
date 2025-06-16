@@ -1,0 +1,70 @@
+# Xcode
+.DS_Store
+build/
+DerivedData/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+xcuserdata/
+*.xccheckout
+*.moved-aside
+*.xcuserstate
+
+# SwiftPM
+.swiftpm/
+.build/
+
+# CocoaPods
+Pods/
+Podfile.lock
+
+# Carthage
+Carthage/Build/
+
+# Accio
+Dependencies/
+.accio/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+
+# Archives
+*.xcarchive
+
+# Core Data SQLite files (local app data)
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+
+# Xcode Previews
+*.preview-thumbnails
+
+# SwiftUI canvas cache
+*.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+
+# Package.resolved (optional: include if using Swift Package Manager)
+# Uncomment to exclude if you don't want to commit dependency versions
+# Package.resolved
+
+# App data
+*.plist
+
+# User data
+*.swp
+*.swo
+*.orig
+
+# Byebug / LLDB breakpoints
+*.lldb
+
+# Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Optional: Exclude environment specific files
+.env

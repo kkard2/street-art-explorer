@@ -1,29 +1,25 @@
 //
-//  HomeView.swift
+//  ProfileView.swift
 //  StreetArtExplorer
 //
-//  Created by student on 27/05/2025.
+//  Created by student on 10/06/2025.
 //
 
 import SwiftUI
 
-struct HomeView: View {
+struct ProfileView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    
+    let user: User
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Place.name, ascending: true)],
         animation: .default)
     private var places: FetchedResults<Place>
-    var user: User
-    
-    init(user: User) {
-        self.user = user
-    }
-    
+
     var body: some View {
         VStack {
+            Text(user.username ?? "UNKNOWN")
             List {
-                ForEach(places) { place in
+                ForEach(places.filter { $0.author?.id == user.id}) { place in
                     let isAuthor = self.user.username == place.author?.username
                     NavigationLink(destination: PlaceDetailView(place: place)) {
                         PlaceRowView(place: place, isAuthor: isAuthor)
@@ -42,22 +38,7 @@ struct HomeView: View {
                 }
             }
         }
-        .navigationTitle("Home")
-        .toolbar {
-            ToolbarItem(placement: .primaryAction) {
-                NavigationLink(destination: AddPlaceView(user: user)) {
-                    Image(systemName: "plus")
-                }
-            }
-            ToolbarItem(placement: .primaryAction) {
-                NavigationLink(destination: ProfileView(user: user)) {
-                    Image(systemName: "person.fill")
-                }
-            }
-        }
     }
+    
 }
 
-#Preview {
-    HomeView(user: User())
-}
